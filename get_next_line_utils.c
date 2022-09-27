@@ -6,7 +6,7 @@
 /*   By: dlima-se <dlima-se@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 18:32:21 by dlima-se          #+#    #+#             */
-/*   Updated: 2022/09/24 19:02:20 by dlima-se         ###   ########.fr       */
+/*   Updated: 2022/09/26 22:57:05 by dlima-se         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,33 @@ size_t	ft_strlen(const char *str)
 	}
 	return (len);
 }
+
+void	ft_bzero(void *dest, size_t len)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < len)
+	{
+		((char *)dest)[i] = '\0';
+		i++;
+	}
+}
+
+
+void	*ft_calloc(size_t nitems, size_t size)
+{
+	void	*p;
+
+	if (nitems == 0 || size == 0 || nitems >= 2147483647 / size)
+		return (NULL);
+	p = malloc(size * nitems);
+	if (!p)
+		return (NULL);
+	ft_bzero(p, nitems * size);
+	return (p);
+}
+
 
 char	*ft_strdup(const char *src)
 {
@@ -58,4 +85,28 @@ char	*ft_strchr(const char *str, int ch)
 	if (ch == 0)
 		return ((char *)str);
 	return (0);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char	*res;
+	size_t	i;
+
+	i = 0;
+	if (start >= ft_strlen(s))
+	{
+		res = ft_calloc(1, 1);
+		return (res);
+	}
+	if ((len + (size_t)start) > ft_strlen(s))
+		len = ft_strlen(s) - (size_t)start;
+	res = ft_calloc(len + 1, sizeof(char));
+	if (!res)
+		return (0);
+	while (i < len)
+	{
+		res[i] = s[i + start];
+		i++;
+	}
+	return (res);
 }
