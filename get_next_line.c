@@ -6,39 +6,74 @@
 /*   By: dlima-se <dlima-se@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 18:31:34 by dlima-se          #+#    #+#             */
-/*   Updated: 2022/09/26 23:11:32 by dlima-se         ###   ########.fr       */
+/*   Updated: 2022/09/29 03:44:33 by dlima-se         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+#define RES(string)		"\033[38;5;75m" string "\033[0m"
+#define ST(string)		"\033[38;5;43m" string "\033[0m"
+#define HEAD(string)	"\033[1m\033[37m" string "\033[0m"
+
 char	*get_next_line(int fd)
 {
-	int	count;
-	static int	i;
-	int	j;
-	char	*str;
-	char	*res;
+	int			count;
+	char		*res;	
+	static char	*st_str;
+	static int	i; //para contar calls
 	
+	i++; //para contar calls
 	if (fd < 0)
-		return ((void *)0);
-	str = (char *)ft_calloc(BUFFER_SIZE, sizeof(char));
-	if (!str)
-		return ((void *)0);
-	count = read(fd, str, BUFFER_SIZE);
-	j = i;
-	if (count >= 0)
+		return (NULL);
+	if (!st_str)
+		st_str = (char *)ft_calloc(BUFFER_SIZE, sizeof(char));
+	res = "";
+	printf(HEAD("FUNCTION CALL %d \n"), i);
+	if (ft_strchr(st_str, '\n'))
 	{
-		while (str[j] != '\n')
-			j++;
+		if (st_str[0] == '\n' && st_str[1] == '\n')
+		{
+			ft_strcpy(st_str, (st_str + 1));
+			return ("\n");
+		}
+		res = ft_strjoin(res, (ft_strchr(st_str, '\n') + 1));
+		printf(RES("res inicial =	%s\n"), res);
+		ft_bzero(st_str, BUFFER_SIZE);
 	}
-	res = substr(str, i, j - i + 1);
-	free(str);
-	i = j + 1;
-	reurn (res);
+	while (!(ft_strchr(st_str, '\n')))
+	{
+		count = read(fd, st_str, BUFFER_SIZE);
+		if (count < 0)
+		{
+			return (NULL);
+			free(res);
+			free(st_str);
+		}
+		res = ft_strjoin(res, st_str);
+	}
+	res = ft_strjoin(res, st_str);
+	res = ft_substr(res, 0, ft_strlen(res) - ft_strlen(ft_strchr(res, '\n')) + 1);
+	printf(ST("res fim =	%s\n"), res);
+	st_str = ft_strchr(st_str, '\n');
+	printf(ST("st_str final = %5s\n"), st_str);
+	return (res);
 }
+
+
 /*
 Read line: correct behavior 
 NULL: there is nothing else to read,or an error occurred
 read, malloc, free
+
+
+	if (res[0] == '\n')
+	{
+		ft_strcpy(st_str, (st_str + 1));
+		printf(ST("st_str final = %5s\n"), st_str);
+		return ("\n");
+	}
+
+		
 */
+

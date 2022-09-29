@@ -6,7 +6,7 @@
 /*   By: dlima-se <dlima-se@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 18:32:21 by dlima-se          #+#    #+#             */
-/*   Updated: 2022/09/26 22:57:05 by dlima-se         ###   ########.fr       */
+/*   Updated: 2022/09/29 02:29:24 by dlima-se         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,25 +51,18 @@ void	*ft_calloc(size_t nitems, size_t size)
 	return (p);
 }
 
-
-char	*ft_strdup(const char *src)
+void	ft_strcpy(char *dest, const char *src)
 {
-	char	*dest;
-	int		len;
-	int		i;
+	size_t	i;
 
 	i = 0;
-	len = ft_strlen(src);
-	dest = (char *)malloc((len + 1) * (sizeof(char)));
-	while (src[i])
+	while (src[i] != '\0')
 	{
 		dest[i] = src[i];
 		i++;
 	}
 	dest[i] = '\0';
-	return (dest);
 }
-
 
 char	*ft_strchr(const char *str, int ch)
 {
@@ -108,5 +101,22 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		res[i] = s[i + start];
 		i++;
 	}
+	return (res);
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*res;
+	int		i;
+
+	i = 0;
+	res = ft_calloc((ft_strlen(s1) + ft_strlen(s2) + 1), sizeof(char));
+	if (!res)
+		return (0);
+	if (!(s1 == NULL))
+		while (*s1)
+			res[i++] = *s1++;
+	while (*s2)
+		res[i++] = *s2++;
 	return (res);
 }
