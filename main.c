@@ -10,7 +10,7 @@ int main()
 	int i = 0;
 	char *str;
 	
-	fd = open("txt_files/t_ptiprinc.txt", O_RDONLY);
+	fd = open("txt_files/t_n.txt", O_RDONLY);
 	printf("> fd = %d\n", fd);
 	while (i < 15)
 	{

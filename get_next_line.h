@@ -6,7 +6,7 @@
 /*   By: dlima-se <dlima-se@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 18:30:38 by dlima-se          #+#    #+#             */
-/*   Updated: 2022/09/29 03:36:59 by dlima-se         ###   ########.fr       */
+/*   Updated: 2022/09/29 21:48:03 by dlima-se         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include <stdio.h>
 #include <fcntl.h>
 
-# define BUFFER_SIZE 10
+# define BUFFER_SIZE 20
 
 size_t	ft_strlen(const char *s);
 void	ft_bzero(void *dest, size_t len);

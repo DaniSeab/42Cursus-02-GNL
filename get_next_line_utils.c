@@ -6,7 +6,7 @@
 /*   By: dlima-se <dlima-se@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 18:32:21 by dlima-se          #+#    #+#             */
-/*   Updated: 2022/09/29 02:29:24 by dlima-se         ###   ########.fr       */
+/*   Updated: 2022/10/01 01:07:16 by dlima-se         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ char	*ft_strchr(const char *str, int ch)
 	return (0);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char *s, unsigned int start, size_t len)
 {
 	char	*res;
 	size_t	i;
@@ -104,7 +104,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (res);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char const *s2)
 {
 	char	*res;
 	int		i;
