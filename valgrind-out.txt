@@ -1,0 +1,227 @@
+==7401== Memcheck, a memory error detector
+==7401== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==7401== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==7401== Command: ./a.out
+==7401== Parent PID: 7250
+==7401== 
+--7401-- 
+--7401-- Valgrind options:
+--7401--    --leak-check=full
+--7401--    --show-leak-kinds=all
+--7401--    --track-origins=yes
+--7401--    --verbose
+--7401--    --log-file=valgrind-out.txt
+--7401-- Contents of /proc/version:
+--7401--   Linux version 5.4.0-94-generic (buildd@lcy02-amd64-053) (gcc version 9.3.0 (Ubuntu 9.3.0-17ubuntu1~20.04)) #106-Ubuntu SMP Thu Jan 6 23:58:14 UTC 2022
+--7401-- 
+--7401-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand
+--7401-- Page sizes: currently 4096, max supported 4096
+--7401-- Valgrind library directory: /usr/lib/x86_64-linux-gnu/valgrind
+--7401-- Reading syms from /home/coder/Desktop/gnl/a.out
+--7401-- Reading syms from /usr/lib/x86_64-linux-gnu/ld-2.31.so
+--7401--   Considering /usr/lib/x86_64-linux-gnu/ld-2.31.so ..
+--7401--   .. CRC mismatch (computed 975d0390 wanted 30bd717f)
+--7401--   Considering /lib/x86_64-linux-gnu/ld-2.31.so ..
+--7401--   .. CRC mismatch (computed 975d0390 wanted 30bd717f)
+--7401--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.31.so ..
+--7401--   .. CRC is valid
+--7401-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/memcheck-amd64-linux
+--7401--    object doesn't have a symbol table
+--7401--    object doesn't have a dynamic symbol table
+--7401-- Scheduler: using generic scheduler lock implementation.
+--7401-- Reading suppressions file: /usr/lib/x86_64-linux-gnu/valgrind/default.supp
+==7401== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-7401-by-coder-on-dlima-se-workspace-5bb556cc78-27rzf
+==7401== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-7401-by-coder-on-dlima-se-workspace-5bb556cc78-27rzf
+==7401== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-7401-by-coder-on-dlima-se-workspace-5bb556cc78-27rzf
+==7401== 
+==7401== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==7401== don't want to do, unless you know exactly what you're doing,
+==7401== or are doing some strange experiment):
+==7401==   /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=7401 ...command...
+==7401== 
+==7401== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==7401==   /path/to/gdb ./a.out
+==7401== and then give GDB the following command
+==7401==   target remote | /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=7401
+==7401== --pid is optional if only one valgrind process is running
+==7401== 
+--7401-- REDIR: 0x4022e10 (ld-linux-x86-64.so.2:strlen) redirected to 0x580c9ce2 (???)
+--7401-- REDIR: 0x4022be0 (ld-linux-x86-64.so.2:index) redirected to 0x580c9cfc (???)
+--7401-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_core-amd64-linux.so
+--7401--    object doesn't have a symbol table
+--7401-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so
+--7401--    object doesn't have a symbol table
+==7401== WARNING: new redirection conflicts with existing -- ignoring it
+--7401--     old: 0x04022e10 (strlen              ) R-> (0000.0) 0x580c9ce2 ???
+--7401--     new: 0x04022e10 (strlen              ) R-> (2007.0) 0x0483f060 strlen
+--7401-- REDIR: 0x401f5f0 (ld-linux-x86-64.so.2:strcmp) redirected to 0x483ffd0 (strcmp)
+--7401-- REDIR: 0x4023370 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4843a20 (mempcpy)
+--7401-- Reading syms from /usr/lib/x86_64-linux-gnu/libc-2.31.so
+--7401--   Considering /usr/lib/x86_64-linux-gnu/libc-2.31.so ..
+--7401--   .. CRC mismatch (computed 86b78530 wanted e380f01c)
+--7401--   Considering /lib/x86_64-linux-gnu/libc-2.31.so ..
+--7401--   .. CRC mismatch (computed 86b78530 wanted e380f01c)
+--7401--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.31.so ..
+--7401--   .. CRC is valid
+--7401-- REDIR: 0x48fb600 (libc.so.6:memmove) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--7401-- REDIR: 0x48fa900 (libc.so.6:strncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--7401-- REDIR: 0x48fb930 (libc.so.6:strcasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--7401-- REDIR: 0x48fa220 (libc.so.6:strcat) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--7401-- REDIR: 0x48fa960 (libc.so.6:rindex) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--7401-- REDIR: 0x48fcdd0 (libc.so.6:rawmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--7401-- REDIR: 0x4917e60 (libc.so.6:wmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--7401-- REDIR: 0x49179a0 (libc.so.6:wcscmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--7401-- REDIR: 0x48fb760 (libc.so.6:mempcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--7401-- REDIR: 0x48fb590 (libc.so.6:bcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--7401-- REDIR: 0x48fa890 (libc.so.6:strncmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--7401-- REDIR: 0x48fa2d0 (libc.so.6:strcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--7401-- REDIR: 0x48fb6c0 (libc.so.6:memset) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--7401-- REDIR: 0x4917960 (libc.so.6:wcschr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--7401-- REDIR: 0x48fa7f0 (libc.so.6:strnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--7401-- REDIR: 0x48fa3b0 (libc.so.6:strcspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--7401-- REDIR: 0x48fb980 (libc.so.6:strncasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--7401-- REDIR: 0x48fa350 (libc.so.6:strcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--7401-- REDIR: 0x48fbad0 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--7401-- REDIR: 0x49190d0 (libc.so.6:wcsnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--7401-- REDIR: 0x49179e0 (libc.so.6:wcscpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--7401-- REDIR: 0x48fa9a0 (libc.so.6:strpbrk) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--7401-- REDIR: 0x48fa280 (libc.so.6:index) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--7401-- REDIR: 0x48fa7b0 (libc.so.6:strlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--7401-- REDIR: 0x4903d20 (libc.so.6:memrchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--7401-- REDIR: 0x48fb9d0 (libc.so.6:strcasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--7401-- REDIR: 0x48fb550 (libc.so.6:memchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--7401-- REDIR: 0x4917ab0 (libc.so.6:wcslen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--7401-- REDIR: 0x48fac60 (libc.so.6:strspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--7401-- REDIR: 0x48fb8d0 (libc.so.6:stpncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--7401-- REDIR: 0x48fb870 (libc.so.6:stpcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--7401-- REDIR: 0x48fce10 (libc.so.6:strchrnul) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--7401-- REDIR: 0x48fba20 (libc.so.6:strncasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--7401-- REDIR: 0x49e3490 (libc.so.6:__strrchr_avx2) redirected to 0x483ea10 (rindex)
+--7401-- REDIR: 0x49e32a0 (libc.so.6:__strchrnul_avx2) redirected to 0x4843540 (strchrnul)
+--7401-- REDIR: 0x48f5260 (libc.so.6:malloc) redirected to 0x483b780 (malloc)
+--7401-- REDIR: 0x49e6650 (libc.so.6:__mempcpy_avx_unaligned_erms) redirected to 0x4843660 (mempcpy)
+--7401-- REDIR: 0x48f5850 (libc.so.6:free) redirected to 0x483c9d0 (free)
+==7401== Conditional jump or move depends on uninitialised value(s)
+==7401==    at 0x4015E3: ft_strlen (get_next_line_utils.c:24)
+==7401==    by 0x40192C: ft_strjoin (get_next_line_utils.c:114)
+==7401==    by 0x4014A9: get_next_line (get_next_line.c:68)
+==7401==    by 0x4011D1: main (main.c:17)
+==7401==  Uninitialised value was created by a heap allocation
+==7401==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7401==    by 0x40168D: ft_calloc (get_next_line_utils.c:40)
+==7401==    by 0x40127F: get_next_line (get_next_line.c:26)
+==7401==    by 0x4011D1: main (main.c:17)
+==7401== 
+==7401== Conditional jump or move depends on uninitialised value(s)
+==7401==    at 0x4019B7: ft_strjoin (get_next_line_utils.c:120)
+==7401==    by 0x4014A9: get_next_line (get_next_line.c:68)
+==7401==    by 0x4011D1: main (main.c:17)
+==7401==  Uninitialised value was created by a heap allocation
+==7401==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7401==    by 0x40168D: ft_calloc (get_next_line_utils.c:40)
+==7401==    by 0x40127F: get_next_line (get_next_line.c:26)
+==7401==    by 0x4011D1: main (main.c:17)
+==7401== 
+==7401== Conditional jump or move depends on uninitialised value(s)
+==7401==    at 0x401723: ft_strcpy (get_next_line_utils.c:56)
+==7401==    by 0x4014DB: get_next_line (get_next_line.c:71)
+==7401==    by 0x4011D1: main (main.c:17)
+==7401==  Uninitialised value was created by a heap allocation
+==7401==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7401==    by 0x40168D: ft_calloc (get_next_line_utils.c:40)
+==7401==    by 0x40127F: get_next_line (get_next_line.c:26)
+==7401==    by 0x4011D1: main (main.c:17)
+==7401== 
+--7401-- REDIR: 0x49e3660 (libc.so.6:__strlen_avx2) redirected to 0x483ef40 (strlen)
+==7401== Conditional jump or move depends on uninitialised value(s)
+==7401==    at 0x483EF58: strlen (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7401==    by 0x48D3E94: __vfprintf_internal (vfprintf-internal.c:1688)
+==7401==    by 0x48BCEBE: printf (printf.c:33)
+==7401==    by 0x4011EA: main (main.c:18)
+==7401==  Uninitialised value was created by a heap allocation
+==7401==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7401==    by 0x40168D: ft_calloc (get_next_line_utils.c:40)
+==7401==    by 0x401941: ft_strjoin (get_next_line_utils.c:114)
+==7401==    by 0x4014A9: get_next_line (get_next_line.c:68)
+==7401==    by 0x4011D1: main (main.c:17)
+==7401== 
+==7401== 
+==7401== HEAP SUMMARY:
+==7401==     in use at exit: 42 bytes in 2 blocks
+==7401==   total heap usage: 21 allocs, 19 frees, 1,091 bytes allocated
+==7401== 
+==7401== Searching for pointers to 2 not-freed blocks
+==7401== Checked 613,960 bytes
+==7401== 
+==7401== 21 bytes in 1 blocks are still reachable in loss record 1 of 2
+==7401==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7401==    by 0x40168D: ft_calloc (get_next_line_utils.c:40)
+==7401==    by 0x4013C5: get_next_line (get_next_line.c:49)
+==7401==    by 0x4011D1: main (main.c:17)
+==7401== 
+==7401== 21 bytes in 1 blocks are definitely lost in loss record 2 of 2
+==7401==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7401==    by 0x40168D: ft_calloc (get_next_line_utils.c:40)
+==7401==    by 0x40127F: get_next_line (get_next_line.c:26)
+==7401==    by 0x4011D1: main (main.c:17)
+==7401== 
+==7401== LEAK SUMMARY:
+==7401==    definitely lost: 21 bytes in 1 blocks
+==7401==    indirectly lost: 0 bytes in 0 blocks
+==7401==      possibly lost: 0 bytes in 0 blocks
+==7401==    still reachable: 21 bytes in 1 blocks
+==7401==         suppressed: 0 bytes in 0 blocks
+==7401== 
+==7401== ERROR SUMMARY: 5 errors from 5 contexts (suppressed: 0 from 0)
+==7401== 
+==7401== 1 errors in context 1 of 5:
+==7401== Conditional jump or move depends on uninitialised value(s)
+==7401==    at 0x483EF58: strlen (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7401==    by 0x48D3E94: __vfprintf_internal (vfprintf-internal.c:1688)
+==7401==    by 0x48BCEBE: printf (printf.c:33)
+==7401==    by 0x4011EA: main (main.c:18)
+==7401==  Uninitialised value was created by a heap allocation
+==7401==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7401==    by 0x40168D: ft_calloc (get_next_line_utils.c:40)
+==7401==    by 0x401941: ft_strjoin (get_next_line_utils.c:114)
+==7401==    by 0x4014A9: get_next_line (get_next_line.c:68)
+==7401==    by 0x4011D1: main (main.c:17)
+==7401== 
+==7401== 
+==7401== 1 errors in context 2 of 5:
+==7401== Conditional jump or move depends on uninitialised value(s)
+==7401==    at 0x401723: ft_strcpy (get_next_line_utils.c:56)
+==7401==    by 0x4014DB: get_next_line (get_next_line.c:71)
+==7401==    by 0x4011D1: main (main.c:17)
+==7401==  Uninitialised value was created by a heap allocation
+==7401==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7401==    by 0x40168D: ft_calloc (get_next_line_utils.c:40)
+==7401==    by 0x40127F: get_next_line (get_next_line.c:26)
+==7401==    by 0x4011D1: main (main.c:17)
+==7401== 
+==7401== 
+==7401== 1 errors in context 3 of 5:
+==7401== Conditional jump or move depends on uninitialised value(s)
+==7401==    at 0x4019B7: ft_strjoin (get_next_line_utils.c:120)
+==7401==    by 0x4014A9: get_next_line (get_next_line.c:68)
+==7401==    by 0x4011D1: main (main.c:17)
+==7401==  Uninitialised value was created by a heap allocation
+==7401==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7401==    by 0x40168D: ft_calloc (get_next_line_utils.c:40)
+==7401==    by 0x40127F: get_next_line (get_next_line.c:26)
+==7401==    by 0x4011D1: main (main.c:17)
+==7401== 
+==7401== 
+==7401== 1 errors in context 4 of 5:
+==7401== Conditional jump or move depends on uninitialised value(s)
+==7401==    at 0x4015E3: ft_strlen (get_next_line_utils.c:24)
+==7401==    by 0x40192C: ft_strjoin (get_next_line_utils.c:114)
+==7401==    by 0x4014A9: get_next_line (get_next_line.c:68)
+==7401==    by 0x4011D1: main (main.c:17)
+==7401==  Uninitialised value was created by a heap allocation
+==7401==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7401==    by 0x40168D: ft_calloc (get_next_line_utils.c:40)
+==7401==    by 0x40127F: get_next_line (get_next_line.c:26)
+==7401==    by 0x4011D1: main (main.c:17)
+==7401== 
+==7401== ERROR SUMMARY: 5 errors from 5 contexts (suppressed: 0 from 0)

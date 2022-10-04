@@ -16,11 +16,10 @@ int main()
 	{
 		str = get_next_line(fd);
 		printf(RES("%s"), str);
-		if (str == "\n")
-			printf(RES("\\n"));
-		printf(SEP("\n\n-----------------------------------------------\n\n"));
 		i++;
+		free(str);
 	}
 	close(fd);
+	ft_strlen(NULL);
 	return (0);
 }

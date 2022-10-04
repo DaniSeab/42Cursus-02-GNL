@@ -6,7 +6,7 @@
 /*   By: dlima-se <dlima-se@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 18:32:21 by dlima-se          #+#    #+#             */
-/*   Updated: 2022/10/01 01:07:16 by dlima-se         ###   ########.fr       */
+/*   Updated: 2022/10/04 02:14:29 by dlima-se         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,43 +15,40 @@
 size_t	ft_strlen(const char *str)
 {
 	size_t	len;
+	int		i;
 
 	len = 0;
-	while (*str != '\0')
+	i = 0;
+	if (!str)
+		return (0);
+	while (str[i] != '\0')
 	{
 		len++;
-		str++;
+		i++;
 	}
 	return (len);
 }
 
-void	ft_bzero(void *dest, size_t len)
+char	*ft_calloc(size_t nitems, size_t size)
 {
+	void	*p;
 	size_t	i;
 
 	i = 0;
-	while (i < len)
-	{
-		((char *)dest)[i] = '\0';
-		i++;
-	}
-}
-
-
-void	*ft_calloc(size_t nitems, size_t size)
-{
-	void	*p;
-
 	if (nitems == 0 || size == 0 || nitems >= 2147483647 / size)
 		return (NULL);
 	p = malloc(size * nitems);
 	if (!p)
 		return (NULL);
-	ft_bzero(p, nitems * size);
+	while (i < size * nitems)
+	{
+		((char *)p)[i++] = '\0';
+		i++;
+	}
 	return (p);
 }
 
-void	ft_strcpy(char *dest, const char *src)
+void	ft_strcpy(char *dest, char *src)
 {
 	size_t	i;
 
@@ -61,10 +58,14 @@ void	ft_strcpy(char *dest, const char *src)
 		dest[i] = src[i];
 		i++;
 	}
+	// while (dest)
+	// {
 	dest[i] = '\0';
+	// 	i++;	
+	// }
 }
 
-char	*ft_strchr(const char *str, int ch)
+char	*ft_strchr(char *str, int ch)
 {
 	char	c;
 
@@ -104,7 +105,7 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 	return (res);
 }
 
-char	*ft_strjoin(char *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*res;
 	int		i;
@@ -119,4 +120,22 @@ char	*ft_strjoin(char *s1, char const *s2)
 	while (*s2)
 		res[i++] = *s2++;
 	return (res);
+}
+
+char	*ft_strdup(char *src)
+{
+	char	*dest;
+	int		len;
+	int		i;
+
+	i = 0;
+	len = ft_strlen(src);
+	dest = (char *)ft_calloc((ft_strlen(src) - 
+	ft_strlen(ft_strchr(src, '\n')) + 1), (sizeof(char)));
+	while (src[i] && src[i] != '\n')
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	return (dest);
 }
