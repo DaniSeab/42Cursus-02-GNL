@@ -11,7 +11,7 @@ int main()
 	
 	fd = open("txt_files/t_n.txt", O_RDONLY);
 	printf("> fd = %d\n", fd);
-	while (i < 4)
+	while (i < 1)
 	{
 		str = get_next_line(fd);
 		printf(RES("%s"), str);

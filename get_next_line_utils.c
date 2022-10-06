@@ -6,7 +6,7 @@
 /*   By: dlima-se <dlima-se@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 18:32:21 by dlima-se          #+#    #+#             */
-/*   Updated: 2022/10/05 23:52:27 by dlima-se         ###   ########.fr       */
+/*   Updated: 2022/10/06 21:51:06 by dlima-se         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*ft_calloc(size_t nitems, size_t size)
 	i = 0;
 	if (nitems == 0 || size == 0 || nitems >= 2147483647 / size)
 		return (NULL);
-	p = malloc(size * nitems);
+	p = (char *)malloc(size * nitems);
 	if (!p)
 		return (NULL);
 	while (i < size * nitems)
@@ -115,10 +115,15 @@ char	*ft_strjoin(char *s1, char *s2)
 	if (!res)
 		return (0);
 	if (!(s1 == NULL))
+	{
 		while (*s1)
 			res[i++] = *s1++;
-	while (*s2)
-		res[i++] = *s2++;
+	}
+	if (!(s2 == NULL))
+	{
+		while (*s2)
+			res[i++] = *s2++;
+	}
 	return (res);
 }
 

@@ -6,7 +6,7 @@
 /*   By: dlima-se <dlima-se@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 23:53:57 by dlima-se          #+#    #+#             */
-/*   Updated: 2022/10/05 23:52:29 by dlima-se         ###   ########.fr       */
+/*   Updated: 2022/10/06 21:19:16 by dlima-se         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,17 @@ char	*get_next_line(int fd)
 			free(temp);
 			temp = NULL;
 			break ;
+			free(st_str);
+			st_str = NULL;
 		}
 	}
-	if (!res)
+	if (!res[0])
 	{
 		free(st_str);
 		st_str = NULL;
+		free(res);
+		res = NULL;
+		return (NULL);
 	}
 	return (res);
 }

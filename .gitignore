@@ -54,3 +54,4 @@ dkms.conf
 #others
 old/
 tester/
+tests/Tester1
