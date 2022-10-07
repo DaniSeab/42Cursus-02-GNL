@@ -6,98 +6,114 @@
 /*   By: dlima-se <dlima-se@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 23:53:57 by dlima-se          #+#    #+#             */
-/*   Updated: 2022/10/06 21:19:16 by dlima-se         ###   ########.fr       */
+/*   Updated: 2022/10/07 18:41:58 by dlima-se         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*get_next_line(int fd)
+//joins 2 strings and frees the first
+char	*ft_strjoin_gnl(char *s1, char *s2)
 {
-	int			count;
-	char		*res;
-	char		*temp;
-	static char	*st_str;
+	char	*res;
+	int		i;
+	int		j;
+	size_t	k;
 
-	count = 0;
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	i = 0;
+	k = 1 + ft_strlen(s1) + ft_strlen(s2);
+	res = (char *)ft_calloc((int)k, sizeof(char));
+	if (!res || !s1 || !s2)
 		return (NULL);
-	if (!st_str)
+	while (s1[i] != 0)
 	{
-		st_str = (char *)ft_calloc(BUFFER_SIZE + 1, sizeof(char));
-		if (!st_str)
-			return (NULL);
+		res[i] = s1[i];
+		i++;
 	}
-	res = (char *)ft_calloc(1, sizeof(char));
-	if (!res)
-			return (NULL);
-	temp = "";
-	if (ft_strchr(st_str, '\n'))
+	j = 0;
+	while (s2[j] != 0)
 	{
-		if (st_str[0] == '\n' && st_str[1] == '\n')
-		{
-			ft_strcpy(st_str, (st_str + 1));
-			st_str[ft_strlen(st_str) + 1] = '\0';
-			res = (char *)ft_calloc(2, 1);
-			res[0] = '\n';
-			return (res);
-		}
-		free(res);
-		res = ft_strdup(ft_strchr(st_str, '\n') + 1);
-		//printf("res inicial =	%s\n", res);
-		if (ft_strchr(res, '\n'))
-			st_str = ft_strdup(ft_strchr(res, '\n'));
-		else
-			st_str = (char *)ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+		res[i] = s2[j];
+		i++;
+		j++;
 	}
-	while (!(ft_strchr(st_str, '\n')))
+	free(s1);
+	s1 = NULL;
+	return (res);
+}
+
+//duplicates until nl
+char	*ft_strdup_gnl_nl(char *src)
+{
+	char	*dest;
+	int		i;
+
+	i = 0;
+	dest = ft_calloc(ft_strlen(src) - ft_strlen(ft_strchr(src, '\n')) + 2, 1);
+	while (src[i] && src[i] != '\n')
 	{
-		count = read(fd, st_str, BUFFER_SIZE);
-		//printf("STATIC LIDA: %s--- %i\n", st_str, count);
-		if (count == 0)
-			break ;
-		if (count <= 0 || !st_str[0])
+		dest[i] = src[i];
+		i++;
+	}
+	if (src[i] && src[i] == '\n')
+	{
+		dest[i] = '\n';
+		i++;
+	}
+	return (dest);
+}
+
+//reads fd and joins result into static char *
+char	*read_file(int fd, char *str_read)
+{
+	int		bytes_read;
+	char	*temp;
+
+	if (!str_read)
+		str_read = (char *)ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	if (!str_read)
+		return (NULL);
+	temp = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	if (!temp)
+		return (NULL);
+	bytes_read = 1;
+	while (bytes_read > 0 && (ft_strchr(str_read, '\n') == 0))
+	{
+		bytes_read = read(fd, temp, BUFFER_SIZE);
+		if (bytes_read < 0)
 		{
-			free(res);
-			res = NULL;
-			free(st_str);
-			st_str = NULL;
-			return (NULL);
-		}
-		if (ft_strchr(st_str, '\n'))
-		{
-			temp = (char *)ft_calloc(ft_strlen(res) + 1, sizeof(char));
-			ft_strcpy(temp, res);
-			free(res);
-			res = ft_strjoin(temp, st_str);
-			ft_strcpy(st_str, ft_strchr(st_str, '\n') + 1);
-			free(temp);
-			return (res);
-		}
-		temp = ft_strjoin(res, st_str);
-		free(res);
-		res = ft_strdup(temp);
-		free(temp);
-		temp = NULL;
-		if (count < BUFFER_SIZE)
-		{
-			temp = ft_substr(res, 0, (ft_strlen(res) - (size_t)BUFFER_SIZE + (size_t)count));
-			free(res);
-			res = ft_strdup(temp);
 			free(temp);
 			temp = NULL;
-			break ;
-			free(st_str);
-			st_str = NULL;
+			return (NULL);
 		}
+		str_read = ft_strjoin_gnl(str_read, temp);
 	}
-	if (!res[0])
+	free(temp);
+	temp = NULL;
+	return (str_read);
+}
+
+char	*get_next_line(int fd)
+{
+	char		*res;
+	static char	*st_str;
+
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+		return (NULL);
+	st_str = read_file(fd, st_str);
+	if (!st_str || !st_str[0])
 	{
 		free(st_str);
 		st_str = NULL;
-		free(res);
-		res = NULL;
 		return (NULL);
 	}
+	res = ft_strdup_gnl_nl(st_str);
+	//printf("res --%s--\n", res);
+	if (!st_str[0])
+	{
+		free(st_str);
+		return (NULL);
+	}
+	st_str = ft_strdup(ft_strchr(st_str, '\n'));
 	return (res);
 }
