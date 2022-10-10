@@ -12,7 +12,7 @@ int main()
 	
 	fd = open("txt_files/t_n.txt", O_RDONLY);
 	printf("> fd = %d\n", fd);
-	while (i < 8)
+	while (i < 3)
 	{
 		str = get_next_line(fd);
 		printf(RES("--%s--\n\n"), str);

@@ -55,3 +55,5 @@ dkms.conf
 old/
 tester/
 tests/Tester1
+tripoule/
+tripoule/gnlTest

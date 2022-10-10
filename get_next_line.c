@@ -6,7 +6,7 @@
 /*   By: dlima-se <dlima-se@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 23:53:57 by dlima-se          #+#    #+#             */
-/*   Updated: 2022/10/07 18:41:58 by dlima-se         ###   ########.fr       */
+/*   Updated: 2022/10/10 03:34:25 by dlima-se         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ char	*ft_strdup_gnl_nl(char *src)
 	int		i;
 
 	i = 0;
+	if (src[0] == '\0')
+		return (NULL);
 	dest = ft_calloc(ft_strlen(src) - ft_strlen(ft_strchr(src, '\n')) + 2, 1);
 	while (src[i] && src[i] != '\n')
 	{
@@ -70,26 +72,27 @@ char	*read_file(int fd, char *str_read)
 	char	*temp;
 
 	if (!str_read)
-		str_read = (char *)ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+		str_read = ft_calloc(1, sizeof(char));
 	if (!str_read)
 		return (NULL);
 	temp = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!temp)
 		return (NULL);
 	bytes_read = 1;
-	while (bytes_read > 0 && (ft_strchr(str_read, '\n') == 0))
+	while (bytes_read > 0)
 	{
 		bytes_read = read(fd, temp, BUFFER_SIZE);
 		if (bytes_read < 0)
 		{
 			free(temp);
-			temp = NULL;
 			return (NULL);
 		}
+		temp[bytes_read] = '\0';
 		str_read = ft_strjoin_gnl(str_read, temp);
+		if (ft_strchr(temp, '\n'))
+			break ;
 	}
 	free(temp);
-	temp = NULL;
 	return (str_read);
 }
 
@@ -101,19 +104,16 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return (NULL);
 	st_str = read_file(fd, st_str);
-	if (!st_str || !st_str[0])
-	{
-		free(st_str);
-		st_str = NULL;
+	if (!st_str)
 		return (NULL);
-	}
 	res = ft_strdup_gnl_nl(st_str);
-	//printf("res --%s--\n", res);
-	if (!st_str[0])
+	if (ft_strchr(st_str, '\n'))
+		st_str = ft_strdup(st_str, ft_strchr(st_str, '\n') + 1);
+	else
 	{
-		free(st_str);
-		return (NULL);
+		st_str = ft_calloc(1, sizeof(char));
+		if (!st_str)
+			return (NULL);
 	}
-	st_str = ft_strdup(ft_strchr(st_str, '\n'));
 	return (res);
 }

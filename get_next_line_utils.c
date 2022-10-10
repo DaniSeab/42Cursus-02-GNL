@@ -6,7 +6,7 @@
 /*   By: dlima-se <dlima-se@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 18:32:21 by dlima-se          #+#    #+#             */
-/*   Updated: 2022/10/07 18:13:31 by dlima-se         ###   ########.fr       */
+/*   Updated: 2022/10/10 03:34:08 by dlima-se         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,19 +64,23 @@ char	*ft_strchr(char *str, int ch)
 	return (0);
 }
 
-char	*ft_strdup(char *src)
+char	*ft_strdup(char *st_free, char *st_src)
 {
 	char	*dest;
 	int		len;
 	int		i;
 
+	if (!st_src[0])
+		return (NULL);
 	i = 0;
-	len = ft_strlen(ft_strchr(src, '\n'));
+	len = ft_strlen(ft_strchr(st_src, '\n'));
 	dest = (char *)ft_calloc((len + 1), (sizeof(char)));
-	while (src[i])
+	while (st_src[i])
 	{
-		dest[i] = src[i];
+		dest[i] = st_src[i];
 		i++;
 	}
+	free(st_free);
+	st_free = NULL;
 	return (dest);
 }
