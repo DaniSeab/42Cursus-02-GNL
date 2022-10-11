@@ -7,18 +7,22 @@
 int main()
 {
 	int	fd;
-	int i = 0;
 	char *str;
 	
 	fd = open("txt_files/t_n.txt", O_RDONLY);
 	printf("> fd = %d\n", fd);
-	while (i < 3)
-	{
-		str = get_next_line(fd);
-		printf(RES("--%s--\n\n"), str);
-		i++;
-		free(str);
-	}
+	str = get_next_line(fd);
+	printf(RES("--%s--\n\n"), str);
+	ft_free(str);
+	str = get_next_line(fd);
+	printf(RES("--%s--\n\n"), str);
+	ft_free(str);
+	str = get_next_line(fd);
+	printf(RES("--%s--\n\n"), str);
+	ft_free(str);
+	str = get_next_line(fd);
+	printf(RES("--%s--\n\n"), str);
+	ft_free(str);
 	close(fd);
 	ft_strlen(NULL);
 	return (0);

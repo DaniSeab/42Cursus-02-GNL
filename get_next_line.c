@@ -6,7 +6,7 @@
 /*   By: dlima-se <dlima-se@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 23:53:57 by dlima-se          #+#    #+#             */
-/*   Updated: 2022/10/10 03:34:25 by dlima-se         ###   ########.fr       */
+/*   Updated: 2022/10/10 22:51:50 by dlima-se         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,9 @@ char	*ft_strjoin_gnl(char *s1, char *s2)
 	char	*res;
 	int		i;
 	int		j;
-	size_t	k;
 
 	i = 0;
-	k = 1 + ft_strlen(s1) + ft_strlen(s2);
-	res = (char *)ft_calloc((int)k, sizeof(char));
+	res = (char *)ft_calloc((ft_strlen(s1) + ft_strlen(s2) + 1), sizeof(char));
 	if (!res || !s1 || !s2)
 		return (NULL);
 	while (s1[i] != 0)
@@ -37,8 +35,12 @@ char	*ft_strjoin_gnl(char *s1, char *s2)
 		i++;
 		j++;
 	}
-	free(s1);
+	//printf("s1       |%s|\n", s1);
+	//printf("s2       |%s|\n", s2);
+	//free(s1);
 	s1 = NULL;
+	//printf("res      |%s|\n", res);
+	//printf("s1       |%s|\n", s1);
 	return (res);
 }
 
@@ -84,15 +86,20 @@ char	*read_file(int fd, char *str_read)
 		bytes_read = read(fd, temp, BUFFER_SIZE);
 		if (bytes_read < 0)
 		{
-			free(temp);
+			ft_free(temp);
 			return (NULL);
 		}
 		temp[bytes_read] = '\0';
+		printf("st       |%s|\n", str_read);
+		printf("tmp      |%s|\n", temp);
 		str_read = ft_strjoin_gnl(str_read, temp);
+		printf("st       |%s|\n", str_read);
+		printf("tmp      |%s|\n", temp);
+		//printf("str_read   |%s|\n", str_read);
 		if (ft_strchr(temp, '\n'))
 			break ;
 	}
-	free(temp);
+	ft_free(temp);
 	return (str_read);
 }
 
@@ -101,19 +108,18 @@ char	*get_next_line(int fd)
 	char		*res;
 	static char	*st_str;
 
+	//printf("start st |%s|\n", st_str);
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return (NULL);
 	st_str = read_file(fd, st_str);
 	if (!st_str)
 		return (NULL);
 	res = ft_strdup_gnl_nl(st_str);
-	if (ft_strchr(st_str, '\n'))
+	//printf("res      |%s|\n", res);
+	if (ft_strchr(st_str, '\n') && (ft_strchr(st_str, '\n') + 1))
 		st_str = ft_strdup(st_str, ft_strchr(st_str, '\n') + 1);
 	else
-	{
-		st_str = ft_calloc(1, sizeof(char));
-		if (!st_str)
-			return (NULL);
-	}
+		ft_free(st_str);
+	//printf("end st   |%s|\n", st_str);
 	return (res);
 }

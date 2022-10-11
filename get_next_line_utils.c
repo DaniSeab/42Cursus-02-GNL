@@ -6,11 +6,20 @@
 /*   By: dlima-se <dlima-se@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 18:32:21 by dlima-se          #+#    #+#             */
-/*   Updated: 2022/10/10 03:34:08 by dlima-se         ###   ########.fr       */
+/*   Updated: 2022/10/11 20:30:06 by dlima-se         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+void	ft_free(char *str)
+{
+	if (str != NULL)
+	{
+		free(str);
+		//str = NULL;
+	}
+}
 
 size_t	ft_strlen(const char *str)
 {
@@ -19,9 +28,9 @@ size_t	ft_strlen(const char *str)
 
 	len = 0;
 	i = 0;
-	if (!str)
+	if (!str || !str[0])
 		return (0);
-	while (str[i] != '\0')
+	while (str[i])
 	{
 		len++;
 		i++;
@@ -70,17 +79,16 @@ char	*ft_strdup(char *st_free, char *st_src)
 	int		len;
 	int		i;
 
-	if (!st_src[0])
+	if (!st_src[0] || !st_free)
 		return (NULL);
 	i = 0;
-	len = ft_strlen(ft_strchr(st_src, '\n'));
+	len = ft_strlen(st_src);
 	dest = (char *)ft_calloc((len + 1), (sizeof(char)));
 	while (st_src[i])
 	{
 		dest[i] = st_src[i];
 		i++;
 	}
-	free(st_free);
-	st_free = NULL;
+	ft_free(st_free);
 	return (dest);
 }
