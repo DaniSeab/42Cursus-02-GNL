@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlima-se <dlima-se@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/03 23:53:57 by dlima-se          #+#    #+#             */
-/*   Updated: 2022/10/10 22:51:50 by dlima-se         ###   ########.fr       */
+/*   Created: 2022/10/11 16:58:30 by dlima-se          #+#    #+#             */
+/*   Updated: 2022/10/11 20:30:06 by dlima-se         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 //joins 2 strings and frees the first
 char	*ft_strjoin_gnl(char *s1, char *s2)
@@ -96,20 +96,20 @@ char	*read_file(int fd, char *str_read)
 char	*get_next_line(int fd)
 {
 	char		*res;
-	static char	*st_str;
+	static char	*st_str[FD_MAX];
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return (NULL);
-	st_str = read_file(fd, st_str);
-	if (!st_str)
+	st_str[fd] = read_file(fd, st_str[fd]);
+	if (!st_str[fd])
 		return (NULL);
-	res = ft_strdup_gnl_nl(st_str);
-	if (ft_strchr(st_str, '\n') && *(ft_strchr(st_str, '\n') + 1) != '\0')
-		st_str = ft_strdup(st_str, ft_strchr(st_str, '\n') + 1);
+	res = ft_strdup_gnl_nl(st_str[fd]);
+	if (ft_strchr(st_str[fd], '\n') && *(ft_strchr(st_str[fd], '\n') + 1) != '\0')
+		st_str[fd] = ft_strdup(st_str[fd], ft_strchr(st_str[fd], '\n') + 1);
 	else
 	{
-		free(st_str);
-		st_str = NULL;
+		free(st_str[fd]);
+		st_str[fd] = NULL;
 	}
 	return (res);
 }
