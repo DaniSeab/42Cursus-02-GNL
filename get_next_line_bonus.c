@@ -104,7 +104,7 @@ char	*get_next_line(int fd)
 	if (!st_str[fd])
 		return (NULL);
 	res = ft_strdup_gnl_nl(st_str[fd]);
-	if (ft_strchr(st_str[fd], '\n') && *(ft_strchr(st_str[fd], '\n') + 1) != '\0')
+	if (ft_strchr(st_str[fd], '\n') && *(ft_strchr(st_str[fd], '\n') + 1))
 		st_str[fd] = ft_strdup(st_str[fd], ft_strchr(st_str[fd], '\n') + 1);
 	else
 	{
