@@ -93,9 +93,11 @@ char	*read_file(int fd, char *str_read)
 	return (str_read);
 }
 
+//the only change for the bonus is making the static variable a pointer pointer
 char	*get_next_line(int fd)
 {
 	char		*res;
+	//we create a ** with a slot for every fd possible and fill each called slot accordingly
 	static char	*st_str[FD_MAX];
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
