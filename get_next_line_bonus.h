@@ -17,6 +17,7 @@
 #  define BUFFER_SIZE 1
 # endif
 
+//max FD taken from running ulimit -n on 42's machine. Moulinette only tests up to 257
 # ifndef FD_MAX
 #  define FD_MAX 1048576
 # endif
