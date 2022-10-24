@@ -12,6 +12,7 @@
 
 #include "get_next_line.h"
 
+//unchanged from libft
 size_t	ft_strlen(const char *str)
 {
 	size_t	len;
@@ -31,6 +32,7 @@ size_t	ft_strlen(const char *str)
 	return (len);
 }
 
+//unchanged from libft
 char	*ft_calloc(size_t nitems, size_t size)
 {
 	void	*p;
@@ -50,6 +52,7 @@ char	*ft_calloc(size_t nitems, size_t size)
 	return (p);
 }
 
+//unchanged from libft
 char	*ft_strchr(char *str, int ch)
 {
 	char	c;
@@ -66,6 +69,7 @@ char	*ft_strchr(char *str, int ch)
 	return (0);
 }
 
+//duplicates st_src and frees st_free so we can return dest to it
 char	*ft_strdup(char *st_free, char *st_src)
 {
 	char	*dest;
