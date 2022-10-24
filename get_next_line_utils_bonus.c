@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+//no changes from main project
+
 #include "get_next_line_bonus.h"
 
 size_t	ft_strlen(const char *str)
