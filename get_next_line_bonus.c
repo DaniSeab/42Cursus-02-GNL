@@ -6,7 +6,7 @@
 /*   By: dlima-se <dlima-se@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 16:58:30 by dlima-se          #+#    #+#             */
-/*   Updated: 2022/10/11 20:30:06 by dlima-se         ###   ########.fr       */
+/*   Updated: 2022/10/25 18:31:19 by vcedraz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ char	*read_file(int fd, char *str_read)
 	return (str_read);
 }
 
-//the only change for the bonus is making the static variable a pointer pointer
+//the only change for the bonus was making the static variable a pointer to a pointer
 char	*get_next_line(int fd)
 {
 	char		*res;
